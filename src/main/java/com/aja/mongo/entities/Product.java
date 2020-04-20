@@ -8,7 +8,7 @@ import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document
-@Data
+ @Data
 @AllArgsConstructor
 @NoArgsConstructor
 public class Product {

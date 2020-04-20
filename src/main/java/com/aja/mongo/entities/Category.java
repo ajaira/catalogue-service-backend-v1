@@ -22,4 +22,11 @@ public class Category {
     private Collection<Product> products= new ArrayList<>();
 
 
+    @Override
+    public String toString() {
+        return "Category{" +
+                "id='" + id + '\'' +
+                ", name='" + name + '\'' +
+                '}';
+    }
 }

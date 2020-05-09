@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: catalogue-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: catalogue
+      tier: backend
+      track: stable
+  template:
+    metadata:
+      labels:
+        app: catalogue
+        tier: backend
+        track: stable
+    spec:
+      containers:
+        - name: catalogue-service
+          image: ajaira/catalogue-service:2.0.0
+          ports:
+            - name: http
+              containerPort: 8080
+          env:
+            - name: MONGO_URL
+              value: mongodb://mongo:27017/catalogue-db
+          imagePullPolicy: Always
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: catalogue-service
+spec:
+  selector:
+    app: catalogue
+    tier: backend
+  ports:
+  - protocol: TCP
+    port: 8081
+    targetPort: 8080
+  type: LoadBalancer
